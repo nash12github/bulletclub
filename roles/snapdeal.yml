@@ -1,0 +1,22 @@
+---
+- name: Configure Apache for httpd
+  hosts: webservers
+  become: yes
+  roles:
+    - snap-httpd
+
+- name: Configure Apache for httpd
+  hosts: webservers
+  become: yes
+  tasks:
+    - name: install git
+      yum:
+        name: git
+        state: present
+        
+    - name: copy the flipkart.com code
+      git:
+        repo: https://github.com/raghavmnt/flipkart-7pm.git
+        dest: /var/www/html
+        clone: yes
+        update: yes
