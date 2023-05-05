@@ -24,6 +24,13 @@
         owner: root
         group: root
 
+    - name: selinux
+      seboolean:
+        name: httpd_can_network_connect
+        state: yes
+        persistent: yes
+      tags: selinux
+
     - name: Reload service httpd, in all cases
       service:
         name: httpd
