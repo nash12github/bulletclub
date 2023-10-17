@@ -1,11 +1,11 @@
 - name: Play 1 - Install Tomcat
-  hosts: tomcat-server
+  hosts: webserver
   become: yes
   roles:
     - tomcat
 
 - name: Play 2 - Python Install
-  hosts: tomcat-server
+  hosts: webserver
   become: yes
   tasks:
     - name: Install Python 3.6
@@ -22,7 +22,7 @@
       tags: python-alternatives
 
 - name: Play 3 - Python library install and copying of War file
-  hosts: tomcat-server
+  hosts: webserver
   become: yes
   vars:
     ansible_python_interpreter: /usr/bin/python
@@ -45,7 +45,7 @@
       tags: copy-war 
 
 - name: Play 4 - Start Tomcat Servers
-  hosts: tomcat-server
+  hosts: webserver
   become: yes
   become_user: root
   tasks:
